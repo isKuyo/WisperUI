@@ -4847,28 +4847,30 @@ Hover=aj.CanChange,
 
 aj.UIElements.Keybind=ag(aj.Value,nil,aj.KeybindFrame.UIElements.Main)
 
-aj.UIElements.Keybind.Size=UDim2.new(
-0,24
-+aj.UIElements.Keybind.Frame.Frame.TextLabel.TextBounds.X,
-0,
-42
-)
+aj.UIElements.Keybind.Size=UDim2.new(0,35,0,35)
 aj.UIElements.Keybind.AnchorPoint=Vector2.new(1,0.5)
-aj.UIElements.Keybind.Position=UDim2.new(1,0,0.5,0)
+aj.UIElements.Keybind.Position=UDim2.new(1,-5,0.5,0)
 
-ad("UIScale",{
-Parent=aj.UIElements.Keybind,
-Scale=.85,
+-- Customize the keybind button appearance
+aj.UIElements.Keybind.Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+aj.UIElements.Keybind.Frame.Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+
+-- Adjust text size and centering
+aj.UIElements.Keybind.Frame.Frame.TextLabel.TextSize = 12
+aj.UIElements.Keybind.Frame.Frame.TextLabel.Size = UDim2.new(1, 0, 1, 0)
+aj.UIElements.Keybind.Frame.Frame.TextLabel.Position = UDim2.new(0, 0, 0, 0)
+
+ad("UICorner", {
+    Parent = aj.UIElements.Keybind.Frame,
+    CornerRadius = UDim.new(0, 6)
 })
 
-ac.AddSignal(aj.UIElements.Keybind.Frame.Frame.TextLabel:GetPropertyChangedSignal"TextBounds",function()
-aj.UIElements.Keybind.Size=UDim2.new(
-0,24
-+aj.UIElements.Keybind.Frame.Frame.TextLabel.TextBounds.X,
-0,
-42
-)
-end)
+ad("UICorner", {
+    Parent = aj.UIElements.Keybind.Frame.Frame,
+    CornerRadius = UDim.new(0, 6)
+})
+
+-- Remove dynamic size adjustment to keep button compact
 
 function aj.Lock(al)
 ak=false
