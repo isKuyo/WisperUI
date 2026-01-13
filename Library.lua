@@ -1,3 +1,4 @@
+print("1")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -936,12 +937,7 @@ function WisperUI:CreateWindow(Config)
         Size = UDim2.new(1, 0, 0, 40),
         BackgroundColor3 = Theme.TopBar,
         BorderSizePixel = 0,
-        ClipsDescendants = false
-    })
-    
-    local TopBarCorner = Create("UICorner", {
-        Parent = TopBar,
-        CornerRadius = UDim.new(0, 15)
+        BackgroundTransparency = 1
     })
     
     local TopBarLine = Create("Frame", {
@@ -1003,12 +999,8 @@ function WisperUI:CreateWindow(Config)
         Position = UDim2.new(0, 0, 1, -50),
         Size = UDim2.new(1, 0, 0, 50),
         BackgroundColor3 = Theme.Background,
-        BorderSizePixel = 0
-    })
-    
-    local BottomBarCorner = Create("UICorner", {
-        Parent = BottomBar,
-        CornerRadius = UDim.new(0, 15)
+        BorderSizePixel = 0,
+        BackgroundTransparency = 1
     })
     
     local BottomBarLine = Create("Frame", {
