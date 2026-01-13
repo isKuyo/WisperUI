@@ -1,4 +1,3 @@
-print("1")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -966,7 +965,8 @@ function WisperUI:CreateWindow(Config)
         Parent = TitleLabel,
         Color = ColorSequence.new({
             ColorSequenceKeypoint.new(0, Theme.Text),
-            ColorSequenceKeypoint.new(0.5, Theme.Accent)
+            ColorSequenceKeypoint.new(0.3, Theme.Accent),
+            ColorSequenceKeypoint.new(1, Theme.Accent)
         }),
         Rotation = 0
     })
