@@ -920,7 +920,7 @@ function WisperUI:CreateWindow(Config)
         Parent = ScreenGui,
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0.288, 0, 0.679, 0),
+        Size = UDim2.new(0.25, 0, 0.55, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
@@ -935,7 +935,8 @@ function WisperUI:CreateWindow(Config)
         Parent = MainFrame,
         Size = UDim2.new(1, 0, 0, 40),
         BackgroundColor3 = Theme.TopBar,
-        BorderSizePixel = 0
+        BorderSizePixel = 0,
+        ClipsDescendants = false
     })
     
     local TopBarCorner = Create("UICorner", {
@@ -956,7 +957,7 @@ function WisperUI:CreateWindow(Config)
         Name = "TitleLabel",
         Parent = TopBar,
         Position = UDim2.new(0, 15, 0, 0),
-        Size = UDim2.new(0, 200, 1, 0),
+        Size = UDim2.new(0.4, 0, 1, 0),
         BackgroundTransparency = 1,
         Text = Config.Title,
         TextColor3 = Theme.Text,
@@ -977,8 +978,8 @@ function WisperUI:CreateWindow(Config)
     local BuildLabel = Create("TextLabel", {
         Name = "BuildLabel",
         Parent = TopBar,
-        Position = UDim2.new(1, -200, 0, 0),
-        Size = UDim2.new(0, 185, 1, 0),
+        Position = UDim2.new(0.5, 0, 0, 0),
+        Size = UDim2.new(0.5, -15, 1, 0),
         BackgroundTransparency = 1,
         Text = "Build: " .. Config.BuildDate,
         TextColor3 = Theme.Text,
@@ -1038,8 +1039,8 @@ function WisperUI:CreateWindow(Config)
     local PlayerLabel = Create("TextLabel", {
         Name = "PlayerLabel",
         Parent = BottomBar,
-        Position = UDim2.new(1, -200, 0, 0),
-        Size = UDim2.new(0, 185, 1, 0),
+        Position = UDim2.new(0.5, 0, 0, 0),
+        Size = UDim2.new(0.5, -15, 1, 0),
         BackgroundTransparency = 1,
         Text = Player.Name,
         TextColor3 = Theme.PlayerText,
