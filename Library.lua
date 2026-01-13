@@ -920,7 +920,7 @@ function WisperUI:CreateWindow(Config)
         Parent = ScreenGui,
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0.374, 0, 0.16, 0),
+        Size = UDim2.new(0.288, 0, 0.679, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
@@ -969,7 +969,7 @@ function WisperUI:CreateWindow(Config)
         Parent = TitleLabel,
         Color = ColorSequence.new({
             ColorSequenceKeypoint.new(0, Theme.Text),
-            ColorSequenceKeypoint.new(1, Theme.Accent)
+            ColorSequenceKeypoint.new(0.5, Theme.Accent)
         }),
         Rotation = 0
     })
@@ -981,10 +981,10 @@ function WisperUI:CreateWindow(Config)
         Size = UDim2.new(0, 185, 1, 0),
         BackgroundTransparency = 1,
         Text = "Build: " .. Config.BuildDate,
-        TextColor3 = Theme.TextDim,
-        TextSize = 13,
+        TextColor3 = Theme.Text,
+        TextSize = 16,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.Gotham
+        Font = Enum.Font.GothamBold
     })
     
     local ContentFrame = Create("Frame", {
