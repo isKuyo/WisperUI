@@ -1,4 +1,3 @@
-print("b")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -931,6 +930,11 @@ function WisperUI:CreateWindow(Config)
         CornerRadius = UDim.new(0, 0)
     })
     
+    local MainFrameAspectRatio = Create("UIAspectRatioConstraint", {
+        Parent = MainFrame,
+        AspectRatio = 1.109
+    })
+    
     local TopBar = Create("Frame", {
         Name = "TopBar",
         Parent = MainFrame,
@@ -946,6 +950,11 @@ function WisperUI:CreateWindow(Config)
         Size = UDim2.new(1, 0, 0.0588235296, 0),
         BackgroundColor3 = Theme.Stroke,
         BorderSizePixel = 0
+    })
+    
+    local TopBarAspectRatio = Create("UIAspectRatioConstraint", {
+        Parent = TopBar,
+        AspectRatio = 14.588
     })
     
     local TitleLabel = Create("TextLabel", {
@@ -965,8 +974,8 @@ function WisperUI:CreateWindow(Config)
     local TitleGradient = Create("UIGradient", {
         Parent = TitleLabel,
         Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(85, 170, 255))
+            ColorSequenceKeypoint.new(0, Theme.Text),
+            ColorSequenceKeypoint.new(1, Theme.Accent)
         }),
         Rotation = 0
     })
@@ -977,7 +986,7 @@ function WisperUI:CreateWindow(Config)
         Position = UDim2.new(0.679435492, 0, 0.264705896, 0),
         Size = UDim2.new(0.300403237, 0, 0.470588237, 0),
         BackgroundTransparency = 1,
-        Text = "build: " .. Config.BuildDate,
+        Text = "build: " .. string.lower(Config.BuildDate),
         TextColor3 = Theme.Text,
         TextScaled = true,
         TextWrapped = true,
@@ -1012,6 +1021,11 @@ function WisperUI:CreateWindow(Config)
         BorderSizePixel = 0
     })
     
+    local BottomBarAspectRatio = Create("UIAspectRatioConstraint", {
+        Parent = BottomBar,
+        AspectRatio = 14.588
+    })
+    
     local TabContainer = Create("Frame", {
         Name = "TabContainer",
         Parent = BottomBar,
@@ -1026,6 +1040,11 @@ function WisperUI:CreateWindow(Config)
         SortOrder = Enum.SortOrder.LayoutOrder,
         VerticalAlignment = Enum.VerticalAlignment.Center,
         Padding = UDim.new(0.0399999991, 0)
+    })
+    
+    local TabContainerAspectRatio = Create("UIAspectRatioConstraint", {
+        Parent = TabContainer,
+        AspectRatio = 13.400
     })
     
     local PlayerLabel = Create("TextLabel", {
