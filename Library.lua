@@ -938,9 +938,14 @@ function WisperUI:CreateWindow(Config)
     local TopBar = Create("Frame", {
         Name = "TopBar",
         Parent = MainFrame,
-        Size = UDim2.new(0.997987926, 0, 0.0758928582, 0),
+        Size = UDim2.new(0.997987926, 0, 0.055, 0),
         BackgroundColor3 = Theme.TopBar,
         BorderSizePixel = 0
+    })
+    
+    local TopBarCorner = Create("UICorner", {
+        Parent = TopBar,
+        CornerRadius = UDim.new(0, 8)
     })
     
     local TopBarLine = Create("Frame", {
@@ -954,14 +959,14 @@ function WisperUI:CreateWindow(Config)
     
     local TopBarAspectRatio = Create("UIAspectRatioConstraint", {
         Parent = TopBar,
-        AspectRatio = 14.588
+        AspectRatio = 20.15
     })
     
     local TitleLabel = Create("TextLabel", {
         Name = "TitleLabel",
         Parent = TopBar,
-        Position = UDim2.new(0.0221774187, 0, 0.264705896, 0),
-        Size = UDim2.new(0.209677413, 0, 0.470588237, 0),
+        Position = UDim2.new(0.0221774187, 0, 0.25, 0),
+        Size = UDim2.new(0.18, 0, 0.5, 0),
         BackgroundTransparency = 1,
         Text = Config.Title,
         TextColor3 = Theme.Text,
@@ -983,8 +988,8 @@ function WisperUI:CreateWindow(Config)
     local BuildLabel = Create("TextLabel", {
         Name = "BuildLabel",
         Parent = TopBar,
-        Position = UDim2.new(0.679435492, 0, 0.3, 0),
-        Size = UDim2.new(0.300403237, 0, 0.4, 0),
+        Position = UDim2.new(0.679435492, 0, 0.25, 0),
+        Size = UDim2.new(0.300403237, 0, 0.5, 0),
         BackgroundTransparency = 1,
         Text = "build: " .. string.lower(Config.BuildDate),
         TextColor3 = Theme.Text,
@@ -997,8 +1002,8 @@ function WisperUI:CreateWindow(Config)
     local ContentFrame = Create("Frame", {
         Name = "ContentFrame",
         Parent = MainFrame,
-        Position = UDim2.new(0, 0, 0.0758928582, 0),
-        Size = UDim2.new(1, 0, 0.848214269, 0),
+        Position = UDim2.new(0, 0, 0.055, 0),
+        Size = UDim2.new(1, 0, 0.869, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
@@ -1006,10 +1011,15 @@ function WisperUI:CreateWindow(Config)
     local BottomBar = Create("Frame", {
         Name = "BottomBar",
         Parent = MainFrame,
-        Position = UDim2.new(0, 0, 0.924107134, 0),
-        Size = UDim2.new(0.997987926, 0, 0.0758928582, 0),
+        Position = UDim2.new(0, 0, 0.924, 0),
+        Size = UDim2.new(0.997987926, 0, 0.076, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
+    })
+    
+    local BottomBarCorner = Create("UICorner", {
+        Parent = BottomBar,
+        CornerRadius = UDim.new(0, 8)
     })
     
     local BottomBarLine = Create("Frame", {
