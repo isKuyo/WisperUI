@@ -1,4 +1,3 @@
-print("1")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -984,8 +983,8 @@ function WisperUI:CreateWindow(Config)
     local BuildLabel = Create("TextLabel", {
         Name = "BuildLabel",
         Parent = TopBar,
-        Position = UDim2.new(0.679435492, 0, 0.35, 0),
-        Size = UDim2.new(0.300403237, 0, 0.35, 0),
+        Position = UDim2.new(0.679435492, 0, 0.3, 0),
+        Size = UDim2.new(0.300403237, 0, 0.4, 0),
         BackgroundTransparency = 1,
         Text = "build: " .. string.lower(Config.BuildDate),
         TextColor3 = Theme.Text,
@@ -1051,8 +1050,8 @@ function WisperUI:CreateWindow(Config)
     local PlayerLabel = Create("TextLabel", {
         Name = "PlayerLabel",
         Parent = BottomBar,
-        Position = UDim2.new(0.679435492, 0, 0.35, 0),
-        Size = UDim2.new(0.300403237, 0, 0.35, 0),
+        Position = UDim2.new(0.679435492, 0, 0.3, 0),
+        Size = UDim2.new(0.300403237, 0, 0.4, 0),
         BackgroundTransparency = 1,
         Text = Player.Name,
         TextColor3 = Theme.Text,
@@ -1076,7 +1075,7 @@ function WisperUI:CreateWindow(Config)
         local TabButton = Create("TextButton", {
             Name = "TabButton_" .. TabName,
             Parent = self.TabContainer,
-            Size = UDim2.new(0.25, 0, 1, 0),
+            Size = UDim2.new(0.2, 0, 0.85, 0),
             BackgroundTransparency = 1,
             Text = "",
             AutoButtonColor = false
@@ -1085,8 +1084,8 @@ function WisperUI:CreateWindow(Config)
         local TabIcon = Create("ImageLabel", {
             Name = "TabIcon",
             Parent = TabButton,
-            Position = UDim2.new(0, 0, 0.15, 0),
-            Size = UDim2.new(0, 18, 0, 18),
+            Position = UDim2.new(0, 0, 0.2, 0),
+            Size = UDim2.new(0, 16, 0, 16),
             BackgroundTransparency = 1,
             Image = Icon or Icons["lucide-home"] or "rbxassetid://7733960981",
             ImageColor3 = Theme.Text,
@@ -1096,8 +1095,8 @@ function WisperUI:CreateWindow(Config)
         local TabLabel = Create("TextLabel", {
             Name = "TabLabel",
             Parent = TabButton,
-            Position = UDim2.new(0, 22, 0.15, 0),
-            Size = UDim2.new(1, -22, 0.7, 0),
+            Position = UDim2.new(0, 20, 0.2, 0),
+            Size = UDim2.new(1, -20, 0.6, 0),
             BackgroundTransparency = 1,
             Text = TabName,
             TextColor3 = Theme.Text,
