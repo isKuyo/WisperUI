@@ -1,4 +1,3 @@
-print("a")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -949,6 +948,20 @@ function WisperUI:CreateWindow(Config)
         BorderSizePixel = 0
     })
     
+    local TitleShadow = Create("TextLabel", {
+        Name = "TitleShadow",
+        Parent = TopBar,
+        Position = UDim2.new(0, 15, 0, 1),
+        Size = UDim2.new(0.4, 0, 1, 0),
+        BackgroundTransparency = 1,
+        Text = Config.Title,
+        TextColor3 = Color3.fromRGB(0, 0, 0),
+        TextSize = 16,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Font = Enum.Font.GothamBold,
+        ZIndex = 0
+    })
+    
     local TitleLabel = Create("TextLabel", {
         Name = "TitleLabel",
         Parent = TopBar,
@@ -980,16 +993,30 @@ function WisperUI:CreateWindow(Config)
         BackgroundTransparency = 1,
         Text = "Build: " .. Config.BuildDate,
         TextColor3 = Theme.Text,
-        TextSize = 16,
+        TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamMedium
+        Font = Enum.Font.GothamBold
+    })
+    
+    local BuildShadow = Create("TextLabel", {
+        Name = "BuildShadow",
+        Parent = TopBar,
+        Position = UDim2.new(0.5, 0, 0, 1),
+        Size = UDim2.new(0.5, -15, 1, 0),
+        BackgroundTransparency = 1,
+        Text = "Build: " .. Config.BuildDate,
+        TextColor3 = Color3.fromRGB(0, 0, 0),
+        TextSize = 14,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        Font = Enum.Font.GothamBold,
+        ZIndex = 0
     })
     
     local ContentFrame = Create("Frame", {
         Name = "ContentFrame",
         Parent = MainFrame,
         Position = UDim2.new(0, 0, 0, 40),
-        Size = UDim2.new(1, 0, 1, -90),
+        Size = UDim2.new(1, 0, 1, -80),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
@@ -997,8 +1024,8 @@ function WisperUI:CreateWindow(Config)
     local BottomBar = Create("Frame", {
         Name = "BottomBar",
         Parent = MainFrame,
-        Position = UDim2.new(0, 0, 1, -50),
-        Size = UDim2.new(1, 0, 0, 50),
+        Position = UDim2.new(0, 0, 1, -40),
+        Size = UDim2.new(1, 0, 0, 40),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0,
         BackgroundTransparency = 1
@@ -1016,15 +1043,15 @@ function WisperUI:CreateWindow(Config)
     local TabContainer = Create("Frame", {
         Name = "TabContainer",
         Parent = BottomBar,
-        Position = UDim2.new(0, 10, 0, 0),
-        Size = UDim2.new(0.5, -10, 1, 0),
+        Position = UDim2.new(0, 0, 0, 0),
+        Size = UDim2.new(0.5, 0, 1, 0),
         BackgroundTransparency = 1
     })
     
     local TabLayout = Create("UIListLayout", {
         Parent = TabContainer,
         FillDirection = Enum.FillDirection.Horizontal,
-        HorizontalAlignment = Enum.HorizontalAlignment.Left,
+        HorizontalAlignment = Enum.HorizontalAlignment.Center,
         VerticalAlignment = Enum.VerticalAlignment.Center,
         Padding = UDim.new(0, 15)
     })
@@ -1036,10 +1063,24 @@ function WisperUI:CreateWindow(Config)
         Size = UDim2.new(0.5, -15, 1, 0),
         BackgroundTransparency = 1,
         Text = Player.Name,
-        TextColor3 = Theme.PlayerText,
+        TextColor3 = Theme.Text,
         TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.Gotham
+        Font = Enum.Font.GothamBold
+    })
+    
+    local PlayerShadow = Create("TextLabel", {
+        Name = "PlayerShadow",
+        Parent = BottomBar,
+        Position = UDim2.new(0.5, 0, 0, 1),
+        Size = UDim2.new(0.5, -15, 1, 0),
+        BackgroundTransparency = 1,
+        Text = Player.Name,
+        TextColor3 = Color3.fromRGB(0, 0, 0),
+        TextSize = 14,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        Font = Enum.Font.GothamBold,
+        ZIndex = 0
     })
     
     MakeDraggable(MainFrame, TopBar)
@@ -1069,7 +1110,21 @@ function WisperUI:CreateWindow(Config)
             Size = UDim2.new(0, 20, 0, 20),
             BackgroundTransparency = 1,
             Image = Icon or Icons["lucide-home"] or "rbxassetid://7733960981",
-            ImageColor3 = Theme.TextDim
+            ImageColor3 = Theme.Text
+        })
+        
+        local TabShadow = Create("TextLabel", {
+            Name = "TabShadow",
+            Parent = TabButton,
+            Position = UDim2.new(0, 30, 0, 1),
+            Size = UDim2.new(1, -30, 1, 0),
+            BackgroundTransparency = 1,
+            Text = TabName,
+            TextColor3 = Color3.fromRGB(0, 0, 0),
+            TextSize = 13,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Font = Enum.Font.GothamBold,
+            ZIndex = 0
         })
         
         local TabLabel = Create("TextLabel", {
@@ -1079,10 +1134,10 @@ function WisperUI:CreateWindow(Config)
             Size = UDim2.new(1, -30, 1, 0),
             BackgroundTransparency = 1,
             Text = TabName,
-            TextColor3 = Theme.TextDim,
+            TextColor3 = Theme.Text,
             TextSize = 13,
             TextXAlignment = Enum.TextXAlignment.Left,
-            Font = Enum.Font.GothamMedium
+            Font = Enum.Font.GothamBold
         })
         
         local TabContent = Create("ScrollingFrame", {
@@ -1123,15 +1178,15 @@ function WisperUI:CreateWindow(Config)
         
         TabButton.MouseEnter:Connect(function()
             if not Tab.Active then
-                Tween(TabIcon, {ImageColor3 = Theme.PlayerText}, 0.15)
-                Tween(TabLabel, {TextColor3 = Theme.PlayerText}, 0.15)
+                Tween(TabIcon, {ImageColor3 = Theme.Accent}, 0.15)
+                Tween(TabLabel, {TextColor3 = Theme.Accent}, 0.15)
             end
         end)
         
         TabButton.MouseLeave:Connect(function()
             if not Tab.Active then
-                Tween(TabIcon, {ImageColor3 = Theme.TextDim}, 0.15)
-                Tween(TabLabel, {TextColor3 = Theme.TextDim}, 0.15)
+                Tween(TabIcon, {ImageColor3 = Theme.Text}, 0.15)
+                Tween(TabLabel, {TextColor3 = Theme.Text}, 0.15)
             end
         end)
         
@@ -1348,8 +1403,8 @@ function WisperUI:CreateWindow(Config)
             else
                 OtherTab.Active = false
                 OtherTab.Content.Visible = false
-                Tween(OtherTab.Icon, {ImageColor3 = Theme.TextDim}, 0.2)
-                Tween(OtherTab.Label, {TextColor3 = Theme.TextDim}, 0.2)
+                Tween(OtherTab.Icon, {ImageColor3 = Theme.Text}, 0.2)
+                Tween(OtherTab.Label, {TextColor3 = Theme.Text}, 0.2)
             end
         end
         self.CurrentTab = Tab
