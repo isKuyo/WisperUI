@@ -946,8 +946,8 @@ function WisperUI:CreateWindow(Config)
     local TopBarLine = Create("Frame", {
         Name = "TopBarLine",
         Parent = TopBar,
-        Position = UDim2.new(0, 0, 1, 0),
-        Size = UDim2.new(1, 0, 0.0588235296, 0),
+        Position = UDim2.new(0, 0, 0.94, 0),
+        Size = UDim2.new(1, 0, 0.06, 0),
         BackgroundColor3 = Theme.Stroke,
         BorderSizePixel = 0
     })
@@ -983,8 +983,8 @@ function WisperUI:CreateWindow(Config)
     local BuildLabel = Create("TextLabel", {
         Name = "BuildLabel",
         Parent = TopBar,
-        Position = UDim2.new(0.679435492, 0, 0.264705896, 0),
-        Size = UDim2.new(0.300403237, 0, 0.470588237, 0),
+        Position = UDim2.new(0.679435492, 0, 0.35, 0),
+        Size = UDim2.new(0.300403237, 0, 0.35, 0),
         BackgroundTransparency = 1,
         Text = "build: " .. string.lower(Config.BuildDate),
         TextColor3 = Theme.Text,
@@ -1050,8 +1050,8 @@ function WisperUI:CreateWindow(Config)
     local PlayerLabel = Create("TextLabel", {
         Name = "PlayerLabel",
         Parent = BottomBar,
-        Position = UDim2.new(0.679435492, 0, 0.264705896, 0),
-        Size = UDim2.new(0.300403237, 0, 0.470588237, 0),
+        Position = UDim2.new(0.679435492, 0, 0.35, 0),
+        Size = UDim2.new(0.300403237, 0, 0.35, 0),
         BackgroundTransparency = 1,
         Text = Player.Name,
         TextColor3 = Theme.Text,
@@ -1075,7 +1075,7 @@ function WisperUI:CreateWindow(Config)
         local TabButton = Create("TextButton", {
             Name = "TabButton_" .. TabName,
             Parent = self.TabContainer,
-            Size = UDim2.new(0.188059703, 0, 0.639999986, 0),
+            Size = UDim2.new(0.25, 0, 1, 0),
             BackgroundTransparency = 1,
             Text = "",
             AutoButtonColor = false
@@ -1084,19 +1084,19 @@ function WisperUI:CreateWindow(Config)
         local TabIcon = Create("ImageLabel", {
             Name = "TabIcon",
             Parent = TabButton,
-            Position = UDim2.new(0, 0, 0, 0),
-            Size = UDim2.new(0, 0, 0, 0),
+            Position = UDim2.new(0, 0, 0.15, 0),
+            Size = UDim2.new(0, 18, 0, 18),
             BackgroundTransparency = 1,
             Image = Icon or Icons["lucide-home"] or "rbxassetid://7733960981",
             ImageColor3 = Theme.Text,
-            Visible = false
+            Visible = true
         })
         
         local TabLabel = Create("TextLabel", {
             Name = "TabLabel",
             Parent = TabButton,
-            Position = UDim2.new(0, 0, 0.180000007, 0),
-            Size = UDim2.new(1, 0, 0.639999986, 0),
+            Position = UDim2.new(0, 22, 0.15, 0),
+            Size = UDim2.new(1, -22, 0.7, 0),
             BackgroundTransparency = 1,
             Text = TabName,
             TextColor3 = Theme.Text,
