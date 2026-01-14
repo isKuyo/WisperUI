@@ -1,3 +1,4 @@
+print("a")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -981,7 +982,7 @@ function WisperUI:CreateWindow(Config)
         TextColor3 = Theme.Text,
         TextSize = 16,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamBold
+        Font = Enum.Font.GothamMedium
     })
     
     local ContentFrame = Create("Frame", {
@@ -1081,7 +1082,7 @@ function WisperUI:CreateWindow(Config)
             TextColor3 = Theme.TextDim,
             TextSize = 13,
             TextXAlignment = Enum.TextXAlignment.Left,
-            Font = Enum.Font.Gotham
+            Font = Enum.Font.GothamMedium
         })
         
         local TabContent = Create("ScrollingFrame", {
@@ -1343,7 +1344,7 @@ function WisperUI:CreateWindow(Config)
                 OtherTab.Active = true
                 OtherTab.Content.Visible = true
                 Tween(OtherTab.Icon, {ImageColor3 = Theme.Accent}, 0.2)
-                Tween(OtherTab.Label, {TextColor3 = Theme.Text}, 0.2)
+                Tween(OtherTab.Label, {TextColor3 = Theme.Accent}, 0.2)
             else
                 OtherTab.Active = false
                 OtherTab.Content.Visible = false
@@ -1361,6 +1362,8 @@ function WisperUI:CreateWindow(Config)
     
     return Window
 end
+
+WisperUI.Icons = Icons
 
 return WisperUI
 
