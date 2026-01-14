@@ -1177,6 +1177,388 @@ function WisperUI:CreateWindow(Config)
             Content = TabContent
         }
         
+        function TabAPI:AddSection(SectionName)
+            local SectionFrame = Create("Frame", {
+                Name = "Section_" .. SectionName,
+                Parent = self.Content,
+                Size = UDim2.new(1, 0, 0, 30),
+                BackgroundColor3 = Theme.ElementBg,
+                BorderSizePixel = 0
+            })
+            
+            local SectionCorner = Create("UICorner", {
+                Parent = SectionFrame,
+                CornerRadius = UDim.new(0, 6)
+            })
+            
+            local SectionHeader = Create("Frame", {
+                Name = "SectionHeader",
+                Parent = SectionFrame,
+                Size = UDim2.new(1, 0, 0, 30),
+                BackgroundTransparency = 1
+            })
+            
+            local SectionTitle = Create("TextLabel", {
+                Name = "SectionTitle",
+                Parent = SectionHeader,
+                Position = UDim2.new(0, 12, 0, 0),
+                Size = UDim2.new(1, -40, 1, 0),
+                BackgroundTransparency = 1,
+                Text = SectionName,
+                TextColor3 = Theme.Text,
+                TextSize = 14,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                Font = Enum.Font.GothamBold
+            })
+            
+            local ExpandButton = Create("TextButton", {
+                Name = "ExpandButton",
+                Parent = SectionHeader,
+                Position = UDim2.new(1, -30, 0, 5),
+                Size = UDim2.new(0, 20, 0, 20),
+                BackgroundTransparency = 1,
+                Text = "▼",
+                TextColor3 = Theme.TextDim,
+                TextSize = 12,
+                Font = Enum.Font.GothamBold,
+                AutoButtonColor = false
+            })
+            
+            local SectionContent = Create("Frame", {
+                Name = "SectionContent",
+                Parent = SectionFrame,
+                Position = UDim2.new(0, 0, 0, 30),
+                Size = UDim2.new(1, 0, 0, 0),
+                BackgroundTransparency = 1,
+                ClipsDescendants = true
+            })
+            
+            local SectionLayout = Create("UIListLayout", {
+                Parent = SectionContent,
+                SortOrder = Enum.SortOrder.LayoutOrder,
+                Padding = UDim.new(0, 6)
+            })
+            
+            local SectionPadding = Create("UIPadding", {
+                Parent = SectionContent,
+                PaddingLeft = UDim.new(0, 12),
+                PaddingRight = UDim.new(0, 12),
+                PaddingTop = UDim.new(0, 6),
+                PaddingBottom = UDim.new(0, 6)
+            })
+            
+            local Expanded = true
+            
+            local function UpdateSize()
+                local contentSize = SectionLayout.AbsoluteContentSize.Y + 12
+                SectionContent.Size = UDim2.new(1, 0, 0, Expanded and contentSize or 0)
+                SectionFrame.Size = UDim2.new(1, 0, 0, 30 + (Expanded and contentSize or 0))
+            end
+            
+            SectionLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(UpdateSize)
+            
+            ExpandButton.MouseButton1Click:Connect(function()
+                Expanded = not Expanded
+                ExpandButton.Text = Expanded and "▼" or "▶"
+                Tween(SectionContent, {Size = UDim2.new(1, 0, 0, Expanded and (SectionLayout.AbsoluteContentSize.Y + 12) or 0)}, 0.2)
+                Tween(SectionFrame, {Size = UDim2.new(1, 0, 0, 30 + (Expanded and (SectionLayout.AbsoluteContentSize.Y + 12) or 0))}, 0.2)
+            end)
+            
+            local SectionAPI = {
+                Frame = SectionFrame,
+                Content = SectionContent
+            }
+            
+            function SectionAPI:AddCheckbox(Config)
+                Config = Config or {}
+                Config.Name = Config.Name or "Checkbox"
+                Config.Default = Config.Default or false
+                Config.Callback = Config.Callback or function() end
+                
+                local Toggled = Config.Default
+                
+                local CheckboxFrame = Create("Frame", {
+                    Name = "Checkbox_" .. Config.Name,
+                    Parent = SectionContent,
+                    Size = UDim2.new(1, 0, 0, 24),
+                    BackgroundTransparency = 1
+                })
+                
+                local CheckboxButton = Create("Frame", {
+                    Name = "CheckboxButton",
+                    Parent = CheckboxFrame,
+                    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                    BorderSizePixel = 0,
+                    Size = UDim2.new(0, 18, 0, 18),
+                    Position = UDim2.new(0, 0, 0.5, -9),
+                    ClipsDescendants = true
+                })
+                
+                local CheckboxCorner = Create("UICorner", {
+                    CornerRadius = UDim.new(0, 4),
+                    Parent = CheckboxButton
+                })
+                
+                local CheckboxGradient = Create("UIGradient", {
+                    Name = "InactiveGradient",
+                    Parent = CheckboxButton,
+                    Color = ColorSequence.new({
+                        ColorSequenceKeypoint.new(0, Color3.fromRGB(34, 39, 45)),
+                        ColorSequenceKeypoint.new(1, Color3.fromRGB(29, 33, 38))
+                    }),
+                    Rotation = 0
+                })
+                
+                local CheckboxFill = Create("Frame", {
+                    Name = "Fill",
+                    Parent = CheckboxButton,
+                    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                    BorderSizePixel = 0,
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    Position = UDim2.new(0.5, 0, 0.5, 0),
+                    Size = Toggled and UDim2.new(1, 0, 1, 0) or UDim2.new(0, 0, 0, 0)
+                })
+                
+                local CheckboxFillCorner = Create("UICorner", {
+                    CornerRadius = UDim.new(0, 4),
+                    Parent = CheckboxFill
+                })
+                
+                local CheckboxFillGradient = Create("UIGradient", {
+                    Name = "Gradient",
+                    Parent = CheckboxFill,
+                    Color = ColorSequence.new({
+                        ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 150, 255)),
+                        ColorSequenceKeypoint.new(1, Color3.fromRGB(85, 170, 255))
+                    }),
+                    Rotation = 0
+                })
+                
+                local CheckboxCheck = Create("ImageLabel", {
+                    Name = "CheckboxCheck",
+                    Parent = CheckboxButton,
+                    BackgroundTransparency = 1,
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    Position = UDim2.new(0.5, 0, 0.5, 0),
+                    Size = UDim2.new(0, 14, 0, 14),
+                    Image = "rbxassetid://3926305904",
+                    ImageRectOffset = Vector2.new(312, 4),
+                    ImageRectSize = Vector2.new(24, 24),
+                    ImageColor3 = Toggled and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(255, 255, 255),
+                    ImageTransparency = Toggled and 0 or 1,
+                    ZIndex = 2
+                })
+                
+                local CheckboxLabel = Create("TextLabel", {
+                    Name = "CheckboxLabel",
+                    Parent = CheckboxFrame,
+                    BackgroundTransparency = 1,
+                    Position = UDim2.new(0, 28, 0, 0),
+                    Size = UDim2.new(1, -28, 1, 0),
+                    Font = Enum.Font.GothamMedium,
+                    Text = Config.Name,
+                    TextColor3 = Toggled and Theme.Text or Theme.TextDim,
+                    TextSize = 13,
+                    TextXAlignment = Enum.TextXAlignment.Left
+                })
+                
+                local CheckboxClickButton = Create("TextButton", {
+                    Name = "CheckboxClickButton",
+                    Parent = CheckboxFrame,
+                    Size = UDim2.new(1, 0, 1, 0),
+                    BackgroundTransparency = 1,
+                    Text = "",
+                    AutoButtonColor = false
+                })
+                
+                local function UpdateCheckbox()
+                    if Toggled then
+                        Tween(CheckboxFill, {Size = UDim2.new(1, 0, 1, 0)}, 0.15)
+                        Tween(CheckboxCheck, {ImageTransparency = 0}, 0.15)
+                        CheckboxCheck.ImageColor3 = Color3.fromRGB(0, 0, 0)
+                        Tween(CheckboxLabel, {TextColor3 = Theme.Text}, 0.15)
+                    else
+                        Tween(CheckboxFill, {Size = UDim2.new(0, 0, 0, 0)}, 0.15)
+                        Tween(CheckboxCheck, {ImageTransparency = 1}, 0.15)
+                        CheckboxCheck.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                        Tween(CheckboxLabel, {TextColor3 = Theme.TextDim}, 0.15)
+                    end
+                    
+                    pcall(Config.Callback, Toggled)
+                end
+                
+                UpdateCheckbox()
+                
+                CheckboxClickButton.MouseButton1Click:Connect(function()
+                    Toggled = not Toggled
+                    UpdateCheckbox()
+                end)
+                
+                CheckboxFrame.MouseEnter:Connect(function()
+                    Tween(CheckboxLabel, {TextColor3 = Theme.Text}, 0.15)
+                end)
+                
+                CheckboxFrame.MouseLeave:Connect(function()
+                    if not Toggled then
+                        Tween(CheckboxLabel, {TextColor3 = Theme.TextDim}, 0.15)
+                    end
+                end)
+                
+                UpdateSize()
+                
+                return {
+                    SetValue = function(Value)
+                        Toggled = Value
+                        UpdateCheckbox()
+                    end,
+                    GetValue = function()
+                        return Toggled
+                    end
+                }
+            end
+            
+            function SectionAPI:AddSlider(Config)
+                Config = Config or {}
+                Config.Name = Config.Name or "Slider"
+                Config.Min = Config.Min or 0
+                Config.Max = Config.Max or 100
+                Config.Default = Config.Default or 50
+                Config.Increment = Config.Increment or 1
+                Config.Callback = Config.Callback or function() end
+                
+                local Value = Config.Default
+                
+                local SliderFrame = Create("Frame", {
+                    Name = "Slider_" .. Config.Name,
+                    Parent = SectionContent,
+                    Size = UDim2.new(1, 0, 0, 45),
+                    BackgroundTransparency = 1
+                })
+                
+                local SliderLabel = Create("TextLabel", {
+                    Name = "SliderLabel",
+                    Parent = SliderFrame,
+                    Size = UDim2.new(1, -50, 0, 18),
+                    BackgroundTransparency = 1,
+                    Text = Config.Name,
+                    TextColor3 = Theme.TextDim,
+                    TextSize = 13,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    Font = Enum.Font.GothamMedium
+                })
+                
+                local SliderValue = Create("TextLabel", {
+                    Name = "SliderValue",
+                    Parent = SliderFrame,
+                    Position = UDim2.new(1, -45, 0, 0),
+                    Size = UDim2.new(0, 45, 0, 18),
+                    BackgroundTransparency = 1,
+                    Text = tostring(Value),
+                    TextColor3 = Theme.TextDim,
+                    TextSize = 13,
+                    TextXAlignment = Enum.TextXAlignment.Right,
+                    Font = Enum.Font.GothamMedium
+                })
+                
+                local SliderBackground = Create("Frame", {
+                    Name = "SliderBackground",
+                    Parent = SliderFrame,
+                    Position = UDim2.new(0, 0, 0, 24),
+                    Size = UDim2.new(1, 0, 0, 4),
+                    BackgroundColor3 = Color3.fromRGB(35, 40, 50),
+                    BorderSizePixel = 0
+                })
+                
+                local SliderBackgroundCorner = Create("UICorner", {
+                    CornerRadius = UDim.new(1, 0),
+                    Parent = SliderBackground
+                })
+                
+                local SliderFill = Create("Frame", {
+                    Name = "SliderFill",
+                    Parent = SliderBackground,
+                    Size = UDim2.new((Value - Config.Min) / (Config.Max - Config.Min), 0, 1, 0),
+                    BackgroundColor3 = Theme.Accent,
+                    BorderSizePixel = 0
+                })
+                
+                local SliderFillCorner = Create("UICorner", {
+                    CornerRadius = UDim.new(1, 0),
+                    Parent = SliderFill
+                })
+                
+                local SliderButton = Create("TextButton", {
+                    Name = "SliderButton",
+                    Parent = SliderBackground,
+                    Size = UDim2.new(1, 0, 1, 0),
+                    BackgroundTransparency = 1,
+                    Text = "",
+                    AutoButtonColor = false
+                })
+                
+                local Dragging = false
+                
+                local function UpdateSlider(Input)
+                    local Pos = (Input.Position.X - SliderBackground.AbsolutePosition.X) / SliderBackground.AbsoluteSize.X
+                    Pos = math.clamp(Pos, 0, 1)
+                    Value = math.floor((Config.Min + (Config.Max - Config.Min) * Pos) / Config.Increment + 0.5) * Config.Increment
+                    Value = math.clamp(Value, Config.Min, Config.Max)
+                    
+                    SliderFill.Size = UDim2.new((Value - Config.Min) / (Config.Max - Config.Min), 0, 1, 0)
+                    SliderValue.Text = tostring(Value)
+                    
+                    pcall(Config.Callback, Value)
+                end
+                
+                SliderButton.MouseButton1Down:Connect(function()
+                    Dragging = true
+                end)
+                
+                UserInputService.InputEnded:Connect(function(Input)
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Dragging = false
+                    end
+                end)
+                
+                SliderButton.MouseButton1Click:Connect(function()
+                    UpdateSlider(UserInputService:GetMouseLocation())
+                end)
+                
+                UserInputService.InputChanged:Connect(function(Input)
+                    if Dragging and Input.UserInputType == Enum.UserInputType.MouseMovement then
+                        UpdateSlider(Input)
+                    end
+                end)
+                
+                SliderFrame.MouseEnter:Connect(function()
+                    Tween(SliderLabel, {TextColor3 = Theme.Text}, 0.15)
+                    Tween(SliderValue, {TextColor3 = Theme.Text}, 0.15)
+                end)
+                
+                SliderFrame.MouseLeave:Connect(function()
+                    Tween(SliderLabel, {TextColor3 = Theme.TextDim}, 0.15)
+                    Tween(SliderValue, {TextColor3 = Theme.TextDim}, 0.15)
+                end)
+                
+                UpdateSize()
+                
+                return {
+                    SetValue = function(NewValue)
+                        Value = math.clamp(NewValue, Config.Min, Config.Max)
+                        SliderFill.Size = UDim2.new((Value - Config.Min) / (Config.Max - Config.Min), 0, 1, 0)
+                        SliderValue.Text = tostring(Value)
+                    end,
+                    GetValue = function()
+                        return Value
+                    end
+                }
+            end
+            
+            UpdateSize()
+            
+            return SectionAPI
+        end
+        
         function TabAPI:AddToggle(Config)
             Config = Config or {}
             Config.Name = Config.Name or "Toggle"
