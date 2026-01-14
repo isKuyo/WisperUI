@@ -1,3 +1,4 @@
+print("b")
 local WisperUI = {}
 
 local TweenService = game:GetService("TweenService")
@@ -890,10 +891,10 @@ local Icons = {
 }
 
 local Theme = {
-	Background = Color3.fromRGB(28, 28, 28),
-	TopBar = Color3.fromRGB(28, 28, 28),
-	Stroke = Color3.fromRGB(64, 64, 64),
-	Accent = Color3.fromRGB(100, 150, 255),
+	Background = Color3.fromRGB(16, 16, 19),
+	TopBar = Color3.fromRGB(16, 16, 19),
+	Stroke = Color3.fromRGB(22, 22, 22),
+	Accent = Color3.fromRGB(85, 170, 255),
 	Text = Color3.fromRGB(255, 255, 255),
 	TextDim = Color3.fromRGB(150, 150, 150),
 	PlayerText = Color3.fromRGB(200, 200, 200),
@@ -920,57 +921,43 @@ function WisperUI:CreateWindow(Config)
         Parent = ScreenGui,
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0.25, 0, 0.55, 0),
+        Size = UDim2.new(0.22337079, 0, 0.694573641, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
     
     local UICorner = Create("UICorner", {
         Parent = MainFrame,
-        CornerRadius = UDim.new(0, 15)
+        CornerRadius = UDim.new(0, 0)
     })
     
     local TopBar = Create("Frame", {
         Name = "TopBar",
         Parent = MainFrame,
-        Size = UDim2.new(1, 0, 0, 40),
+        Size = UDim2.new(0.997987926, 0, 0.0758928582, 0),
         BackgroundColor3 = Theme.TopBar,
-        BorderSizePixel = 0,
-        BackgroundTransparency = 1
+        BorderSizePixel = 0
     })
     
     local TopBarLine = Create("Frame", {
         Name = "TopBarLine",
         Parent = TopBar,
-        Position = UDim2.new(0, 0, 1, -1),
-        Size = UDim2.new(1, 0, 0, 1),
+        Position = UDim2.new(0, 0, 1, 0),
+        Size = UDim2.new(1, 0, 0.0588235296, 0),
         BackgroundColor3 = Theme.Stroke,
         BorderSizePixel = 0
-    })
-    
-    local TitleShadow = Create("TextLabel", {
-        Name = "TitleShadow",
-        Parent = TopBar,
-        Position = UDim2.new(0, 15, 0, 1),
-        Size = UDim2.new(0.4, 0, 1, 0),
-        BackgroundTransparency = 1,
-        Text = Config.Title,
-        TextColor3 = Color3.fromRGB(0, 0, 0),
-        TextSize = 16,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        Font = Enum.Font.GothamBold,
-        ZIndex = 0
     })
     
     local TitleLabel = Create("TextLabel", {
         Name = "TitleLabel",
         Parent = TopBar,
-        Position = UDim2.new(0, 15, 0, 0),
-        Size = UDim2.new(0.4, 0, 1, 0),
+        Position = UDim2.new(0.0221774187, 0, 0.264705896, 0),
+        Size = UDim2.new(0.209677413, 0, 0.470588237, 0),
         BackgroundTransparency = 1,
         Text = Config.Title,
         TextColor3 = Theme.Text,
-        TextSize = 16,
+        TextScaled = true,
+        TextWrapped = true,
         TextXAlignment = Enum.TextXAlignment.Left,
         Font = Enum.Font.GothamBold
     })
@@ -978,9 +965,8 @@ function WisperUI:CreateWindow(Config)
     local TitleGradient = Create("UIGradient", {
         Parent = TitleLabel,
         Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Theme.Text),
-            ColorSequenceKeypoint.new(0.3, Theme.Accent),
-            ColorSequenceKeypoint.new(1, Theme.Accent)
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(85, 170, 255))
         }),
         Rotation = 0
     })
@@ -988,35 +974,22 @@ function WisperUI:CreateWindow(Config)
     local BuildLabel = Create("TextLabel", {
         Name = "BuildLabel",
         Parent = TopBar,
-        Position = UDim2.new(0.5, 0, 0, 0),
-        Size = UDim2.new(0.5, -15, 1, 0),
+        Position = UDim2.new(0.679435492, 0, 0.264705896, 0),
+        Size = UDim2.new(0.300403237, 0, 0.470588237, 0),
         BackgroundTransparency = 1,
-        Text = "Build: " .. Config.BuildDate,
+        Text = "build: " .. Config.BuildDate,
         TextColor3 = Theme.Text,
-        TextSize = 14,
+        TextScaled = true,
+        TextWrapped = true,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamBold
-    })
-    
-    local BuildShadow = Create("TextLabel", {
-        Name = "BuildShadow",
-        Parent = TopBar,
-        Position = UDim2.new(0.5, 0, 0, 1),
-        Size = UDim2.new(0.5, -15, 1, 0),
-        BackgroundTransparency = 1,
-        Text = "Build: " .. Config.BuildDate,
-        TextColor3 = Color3.fromRGB(0, 0, 0),
-        TextSize = 14,
-        TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamBold,
-        ZIndex = 0
+        Font = Enum.Font.GothamMedium
     })
     
     local ContentFrame = Create("Frame", {
         Name = "ContentFrame",
         Parent = MainFrame,
-        Position = UDim2.new(0, 0, 0, 40),
-        Size = UDim2.new(1, 0, 1, -80),
+        Position = UDim2.new(0, 0, 0.0758928582, 0),
+        Size = UDim2.new(1, 0, 0.848214269, 0),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0
     })
@@ -1024,18 +997,17 @@ function WisperUI:CreateWindow(Config)
     local BottomBar = Create("Frame", {
         Name = "BottomBar",
         Parent = MainFrame,
-        Position = UDim2.new(0, 0, 1, -40),
-        Size = UDim2.new(1, 0, 0, 40),
+        Position = UDim2.new(0, 0, 0.924107134, 0),
+        Size = UDim2.new(0.997987926, 0, 0.0758928582, 0),
         BackgroundColor3 = Theme.Background,
-        BorderSizePixel = 0,
-        BackgroundTransparency = 1
+        BorderSizePixel = 0
     })
     
     local BottomBarLine = Create("Frame", {
         Name = "BottomBarLine",
         Parent = BottomBar,
-        Position = UDim2.new(0, 0, 0, 0),
-        Size = UDim2.new(1, 0, 0, 1),
+        Position = UDim2.new(0, 0, -0.0588235296, 0),
+        Size = UDim2.new(1, 0, 0.0588235296, 0),
         BackgroundColor3 = Theme.Stroke,
         BorderSizePixel = 0
     })
@@ -1043,44 +1015,31 @@ function WisperUI:CreateWindow(Config)
     local TabContainer = Create("Frame", {
         Name = "TabContainer",
         Parent = BottomBar,
-        Position = UDim2.new(0, 0, 0, 0),
-        Size = UDim2.new(0.5, 0, 1, 0),
+        Position = UDim2.new(0.0221774187, 0, 0.117647059, 0),
+        Size = UDim2.new(0.675403237, 0, 0.735294104, 0),
         BackgroundTransparency = 1
     })
     
     local TabLayout = Create("UIListLayout", {
         Parent = TabContainer,
         FillDirection = Enum.FillDirection.Horizontal,
-        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+        SortOrder = Enum.SortOrder.LayoutOrder,
         VerticalAlignment = Enum.VerticalAlignment.Center,
-        Padding = UDim.new(0, 15)
+        Padding = UDim.new(0.0399999991, 0)
     })
     
     local PlayerLabel = Create("TextLabel", {
         Name = "PlayerLabel",
         Parent = BottomBar,
-        Position = UDim2.new(0.5, 0, 0, 0),
-        Size = UDim2.new(0.5, -15, 1, 0),
+        Position = UDim2.new(0.679435492, 0, 0.264705896, 0),
+        Size = UDim2.new(0.300403237, 0, 0.470588237, 0),
         BackgroundTransparency = 1,
         Text = Player.Name,
         TextColor3 = Theme.Text,
-        TextSize = 14,
+        TextScaled = true,
+        TextWrapped = true,
         TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamBold
-    })
-    
-    local PlayerShadow = Create("TextLabel", {
-        Name = "PlayerShadow",
-        Parent = BottomBar,
-        Position = UDim2.new(0.5, 0, 0, 1),
-        Size = UDim2.new(0.5, -15, 1, 0),
-        BackgroundTransparency = 1,
-        Text = Player.Name,
-        TextColor3 = Color3.fromRGB(0, 0, 0),
-        TextSize = 14,
-        TextXAlignment = Enum.TextXAlignment.Right,
-        Font = Enum.Font.GothamBold,
-        ZIndex = 0
+        Font = Enum.Font.GothamMedium
     })
     
     MakeDraggable(MainFrame, TopBar)
@@ -1097,7 +1056,7 @@ function WisperUI:CreateWindow(Config)
         local TabButton = Create("TextButton", {
             Name = "TabButton_" .. TabName,
             Parent = self.TabContainer,
-            Size = UDim2.new(0, 100, 0, 40),
+            Size = UDim2.new(0.188059703, 0, 0.639999986, 0),
             BackgroundTransparency = 1,
             Text = "",
             AutoButtonColor = false
@@ -1106,38 +1065,26 @@ function WisperUI:CreateWindow(Config)
         local TabIcon = Create("ImageLabel", {
             Name = "TabIcon",
             Parent = TabButton,
-            Position = UDim2.new(0, 5, 0.5, -10),
-            Size = UDim2.new(0, 20, 0, 20),
+            Position = UDim2.new(0, 0, 0, 0),
+            Size = UDim2.new(0, 0, 0, 0),
             BackgroundTransparency = 1,
             Image = Icon or Icons["lucide-home"] or "rbxassetid://7733960981",
-            ImageColor3 = Theme.Text
-        })
-        
-        local TabShadow = Create("TextLabel", {
-            Name = "TabShadow",
-            Parent = TabButton,
-            Position = UDim2.new(0, 30, 0, 1),
-            Size = UDim2.new(1, -30, 1, 0),
-            BackgroundTransparency = 1,
-            Text = TabName,
-            TextColor3 = Color3.fromRGB(0, 0, 0),
-            TextSize = 13,
-            TextXAlignment = Enum.TextXAlignment.Left,
-            Font = Enum.Font.GothamBold,
-            ZIndex = 0
+            ImageColor3 = Theme.Text,
+            Visible = false
         })
         
         local TabLabel = Create("TextLabel", {
             Name = "TabLabel",
             Parent = TabButton,
-            Position = UDim2.new(0, 30, 0, 0),
-            Size = UDim2.new(1, -30, 1, 0),
+            Position = UDim2.new(0, 0, 0.180000007, 0),
+            Size = UDim2.new(1, 0, 0.639999986, 0),
             BackgroundTransparency = 1,
             Text = TabName,
             TextColor3 = Theme.Text,
-            TextSize = 13,
+            TextScaled = true,
+            TextWrapped = true,
             TextXAlignment = Enum.TextXAlignment.Left,
-            Font = Enum.Font.GothamBold
+            Font = Enum.Font.GothamMedium
         })
         
         local TabContent = Create("ScrollingFrame", {
